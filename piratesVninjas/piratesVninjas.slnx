@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="piratesVninjas/piratesVninjas.vcxproj" />
+  <Project Path="piratesVninjas/piratesVninjas.vcxproj" Id="76ccb136-0b8d-43a4-8597-96cd754fdb0a" />
 </Solution>

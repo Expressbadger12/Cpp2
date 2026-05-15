@@ -16,7 +16,8 @@ public:
 };
 
 class ninja : public fighter {
-	string name = "Ninjohnson";
+public:	
+	string name;
 	int health = 25;
 	int speed = 100;
 
@@ -27,10 +28,15 @@ class ninja : public fighter {
 	void ThrowStars() {
 		cout << name << ": 'I am throwing my throwing stars!' " << endl;
 	}
+
+	ninja(string n) {
+		name = n;
+	}
 };
 
 class pirate : public fighter {
-	string name = "WarfareBeard";
+public:	
+	string name;
 	int health = 75;
 	int speed = 50;
 
@@ -40,6 +46,10 @@ class pirate : public fighter {
 
 	void UseSword() {
 		cout << name << ": 'Yarrr! I'm swooshing my sword!" << endl;
+	}
+
+	pirate(string n) {
+		name = n;
 	}
 };
 
@@ -69,24 +79,55 @@ void sickIntro() {
 
 	cout << "" << endl;
 	cout << "WELCOME TO PIRATES VERSES NINJAS!" << endl;
+	printLine();
 }
 
 int main()
 {
-	
 	sickIntro();
+
+
+	string pname;
+	string nname;
+
+	cout << "Name your Pirate: ";
+	cin >> pname;
+
+	cout << endl;
+
+	cout << "Name your Ninja: ";
+	cin >> nname;
+
+
+	//back in the day the names were hard coded
+	// there were Ninjohnson and WarefareBeard. 
+	//This doesn't matter at all, I just really liked those names so I don't want them to disapear forever.
+
+	ninja Ninja = ninja(nname);
+	pirate Pirate = pirate(pname);
+
+
+	Pirate.attack();
+	cout << endl;
+	Ninja.attack();
+	cout << endl;
+
+	Pirate.UseSword();
+	cout << endl;
+
+	Ninja.ThrowStars();
+	cout << endl;
+
+
+	//whoever has the longer name wins. It's kinda funny that way
+	
+	if (Ninja.name.length() > Pirate.name.length()) {
+		cout << Ninja.name << " wins the duel!" << endl;
+	}
+	else if (Ninja.name.length() < Pirate.name.length()) {
+		cout << Pirate.name << " wins the duel!" << endl;
+	}
+	else {
+		cout << "It's a tie!" << endl;
+	}
 }
-
-/*
-[CHECK]		Add a method to your main.cpp file and call it from the main function to display a cool intro to the game.
-[CHECK]		Create a class called Character class.
-[CHECK]  	Create a public property in the Character class and call it Name.
-[CHECK] 	Create 2 classes that inherit from the Character class.  (examples, ninja, and pirate).
-[CHECK] 	Create a method called ThrowStars in the Ninja class which outputs the phrase to the screen "I am throwing stars!";
-[CHECK] 	Create a method called UseSword in the Pirate class which outputs to the screen "I am Swooshing my Sword!".
-			Create a constructor for both subclasses of the  Character class to initialize all public and private properties in the Character class and subclasses. (Hint: The constructor is only needed in the Ninja and Pirate classes)
-			This must have a great user experience.
-			The more features, classes, and objects, you add to this simulation, the better your grade will be.
-			Using your own comments, comment on each line of code with the exception of cout statements unless it is at the top of a block of them.
-
-*/
