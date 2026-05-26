@@ -4,25 +4,71 @@
 #include <iostream>
 using namespace std;
 
-class fighter {
+class GameStructure {
+public:
+	virtual void Help() {
+
+	}
+};
+
+
+class fighter : public GameStructure {
+private:
+	int health = 400;
+	int speed = 400;
+
 public:
 	string name;
-	int health;
-	int speed;
 
-	void attack() {
+	virtual int attack() {
 		cout << "The character attacks!" << endl;
+		return 10;
 	};
+
+	//setter
+	void setHealth(int h) {
+		if (health - h <= 0) {
+			health = 0;
+			cout << name << " has died." << endl;
+		}
+		else {
+			health = health - h;
+		}
+	}
+
+
+	//getter
+	int getHealth() {
+		return health;
+	}
+
+	void talk() {
+		cout << name << ": You're going down!" << endl;
+	}
+
+	void talk(string n, string message) {
+		cout << n << ": " << message << endl;
+	}
+
+	void Help() {
+
+	}
+
+
 };
 
 class ninja : public fighter {
-public:	
-	string name;
+private:
 	int health = 25;
 	int speed = 100;
 
-	void attack() {
+public:	
+	string name;
+
+	int attack() override {
 		cout << name << " springs fourth. Armed with ninja stars." << endl;
+
+		return 25;
 	}
 
 	void ThrowStars() {
@@ -32,16 +78,33 @@ public:
 	ninja(string n) {
 		name = n;
 	}
+
+	void Help() {
+		cout << "Ninjas are fast and deal a lot of damage, but they don't have very many hit points" << endl;
+	}
+
+	void talk() {
+		cout << name << ": You're going down!" << endl;
+	}
+
+	void talk(string n, string message) {
+		cout << n << ": " << message << endl;
+	}
+
+
 };
 
 class pirate : public fighter {
-public:	
-	string name;
+private:
 	int health = 75;
 	int speed = 50;
+public:	
+	string name;
 
-	void attack() {
+
+	int attack() override {
 		cout << name << " leaps from the mast and draws his cutlass." << endl;
+		return 15;
 	}
 
 	void UseSword() {
@@ -51,6 +114,19 @@ public:
 	pirate(string n) {
 		name = n;
 	}
+
+	void Help() {
+		cout << "Pirates are pretty well-rounded in their skills. They're experts at nothing but they can do a lot." << endl;
+	}
+
+	void talk() {
+		cout << name << ": You're going down!" << endl;
+	}
+
+	void talk(string n, string message) {
+		cout << n << ": " << message << endl;
+	}
+
 };
 
 
@@ -118,16 +194,36 @@ int main()
 	Ninja.ThrowStars();
 	cout << endl;
 
+	cout << "They can say a default line: " << endl;
+	Pirate.talk();
+	cout << "Or they can say a custom message: " << endl;
+	Pirate.talk(Pirate.name, "Yar har fiddle dee dee");
+
+	cout << "Here's the help text for both: " << endl;
+
+	Pirate.Help();
+	Ninja.Help();
+
+
+
+
+
+
+
+
+
+
+
 
 	//whoever has the longer name wins. It's kinda funny that way
 	
-	if (Ninja.name.length() > Pirate.name.length()) {
-		cout << Ninja.name << " wins the duel!" << endl;
-	}
-	else if (Ninja.name.length() < Pirate.name.length()) {
-		cout << Pirate.name << " wins the duel!" << endl;
-	}
-	else {
-		cout << "It's a tie!" << endl;
-	}
+	//if (Ninja.name.length() > Pirate.name.length()) {
+	//	cout << Ninja.name << " wins the duel!" << endl;
+	//}
+	//else if (Ninja.name.length() < Pirate.name.length()) {
+	//	cout << Pirate.name << " wins the duel!" << endl;
+	//}
+	//else {
+	//	cout << "It's a tie!" << endl;
+	//}
 }
