@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\w3d1class\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DCD6BE07-0822-4BED-906F-9CBF0E947E37}|w3d1class\\w3d1class.vcxproj|C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\w3d1class\\w3d1class\\w3d1class.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{DCD6BE07-0822-4BED-906F-9CBF0E947E37}|w3d1class\\w3d1class.vcxproj|solutionrelative:w3d1class\\w3d1class.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "w3d1class.cpp",
+              "DocumentMoniker": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\w3d1class\\w3d1class\\w3d1class.cpp",
+              "RelativeDocumentMoniker": "w3d1class\\w3d1class.cpp",
+              "ToolTip": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\w3d1class\\w3d1class\\w3d1class.cpp",
+              "RelativeToolTip": "w3d1class\\w3d1class.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-26T18:33:15.21Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
