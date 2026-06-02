@@ -1,0 +1,3 @@
+Hello, welcome to our class
+Today we will review file I/O
+Thank you for attending the class today
