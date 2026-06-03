@@ -1,0 +1,4 @@
+﻿  exceptionassignment.cpp
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\exceptionassignment\exceptionassignment\exceptionassignment.cpp(34,1): warning C4715: 'getIncome': not all control paths return a value
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\exceptionassignment\exceptionassignment\exceptionassignment.cpp(60,1): warning C4715: 'getExpenses': not all control paths return a value
+  exceptionassignment.vcxproj -> C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\exceptionassignment\x64\Debug\exceptionassignment.exe
