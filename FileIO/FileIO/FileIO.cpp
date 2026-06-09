@@ -7,10 +7,46 @@
 
 using namespace std;
 
+
+void write() {
+	ofstream outputFile("text.txt");
+	string text;
+	cout << "What would you like to write to the file?" << endl;
+	getline(std::cin, text);
+	outputFile << text;
+	cout << "Written: '" << text << "'" << endl;
+
+	outputFile.close();
+	cout << "Saved" << endl;
+}
+
+void read() {
+	string text; 
+	ifstream file("text.txt");
+
+	while (getline(file, text)) {
+		cout << text;
+	}
+}
+
 int main()
-{
+{	
+	string choice;
+	while (true) {
+		cout << endl;
+		cout << "Would you like to " << endl;
+		cout << "1 | Read the file" << endl;
+		cout << "2 | write to the file" << endl;
 
+		getline(cin, choice);
 
+		if (choice == "1") {
+			read();
+		}
+		else if (choice == "2") {
+			write();
+		}
+	}
 }
 
 /*

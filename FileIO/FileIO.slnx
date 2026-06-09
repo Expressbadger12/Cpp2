@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="FileIO/FileIO.vcxproj" />
+  <Project Path="FileIO/FileIO.vcxproj" Id="87be3c93-6bf5-4199-969c-039aaf9e4954" />
 </Solution>
