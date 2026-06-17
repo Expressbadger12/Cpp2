@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <random>
+#include <algorithm>
 
 
 //I was going to do a calculator but then I realized that all my functions were just taking doubles
@@ -24,13 +25,20 @@ public:
 };
 
 void makeBracket(fencer* fencers) {
-	std::random_device r;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	std::shuffle(fencers, fencers + 6, gen);
+
+
+
 }
 
 void listFencers(fencer* fencers) {
 	
 	std::cout << "The fencers are: " << std::endl;
-	for (int i = 0; i < (sizeof(fencers)); i++) {
+	for (int i = 0; i < 6; i++) {
 		std::cout << fencers[i].name << std::endl;
 	}
 }
@@ -38,6 +46,9 @@ void listFencers(fencer* fencers) {
 
 void countRounds(fencer* one, fencer* two, int* length) {
 	
+	one->score = 0;
+	two->score = 0;
+
 	std::cout << "counting rounds" << std::endl;
 
 	while (true){
@@ -71,7 +82,7 @@ void countRounds(fencer* one, fencer* two, int* length) {
 				break;
 			}
 			else if (two->score - one->score > 1) {
-				std::cout << one->name << " wins!" << std::endl;
+				std::cout << two->name << " wins!" << std::endl;
 				two->wins += 1;
 				break;
 			}
@@ -83,12 +94,17 @@ void countRounds(fencer* one, fencer* two, int* length) {
 	}
 }
 
-void displayBracket() {
-
+void displayBracket(fencer* bracket) {
+	std::cout << "The bracket its:" << std::endl;
+	std::cout << bracket[0].name << " vs " << bracket[1].name << std::endl;
+	std::cout << bracket[2].name << " vs " << bracket[3].name << std::endl;
+	std::cout << bracket[4].name << " vs " << bracket[5].name << std::endl;
 }
 
-void clearBracket(fencer* stemble, fencer* mssck, fencer* grrlo, fencer* bandin, fencer* clwon, fencer* zlack, fencer* fencers) {
-	fencers[6] = {*stemble, *mssck, *grrlo, *bandin, *clwon, *zlack};
+void clearBracket(fencer* bracket, fencer* original) {
+	for (int i = 0; i < 6; i++) {
+		bracket[i] = original[i];
+	}
 }
 
 int main()
@@ -105,15 +121,137 @@ int main()
 
 	fencer zlack = fencer("Zlack", 0);
 
-	fencer fencers[6] = {stemble, mssck, grrlo, bandin, clwon, zlack};
+	fencer originalFencers[6] =
+	{
+		stemble,
+		mssck,
+		grrlo,
+		bandin,
+		clwon,
+		zlack
+	};
 
-	listFencers(fencers);
+	fencer fencers[6] =
+	{
+		stemble,
+		mssck,
+		grrlo,
+		bandin,
+		clwon,
+		zlack
+	};
 
-	std::cout << "This line runs" << "\n";
+
 	int roundNorm = 10;
 
-	makeBracket(fencers);
+	std::string choice;
 
+	while (true) {
+		std::cout << "What would you like to do?" << std::endl;
+		std::cout << "1 | list fencers" << std::endl;
+		std::cout << "2 | create bracket" << std::endl;
+		std::cout << "3 | reset bracket" << std::endl;
+		std::cout << "4 | list bracket" << std::endl;
+		std::cout << "5 | count points" << std::endl;
+
+		std::cin >> choice;
+
+		if (choice == "1") {
+
+			listFencers(fencers);
+		}
+		else if (choice == "2") {
+			makeBracket(fencers);
+		}
+		else if (choice == "3") {
+			clearBracket(fencers, originalFencers);
+		}
+		else if (choice == "4") {
+			displayBracket(fencers);
+		}
+		else if (choice == "5") {
+
+			std::string chons;
+			std::string chins;
+
+			fencer* one;
+			fencer* two;
+
+			while (true) {
+
+
+				for (int i = 0; i < 6; i++) {
+					std::cout << i + 1 << " | " << fencers[i].name << std::endl;
+				}
+				std::cout << "Fencer 1:" << std::endl;
+				std::cin >> chons;
+
+
+				if (chons == "1") {
+					one = &fencers[0];
+				}
+				else if (chons == "2") {
+					one = &fencers[1];
+				}
+				else if (chons == "3") {
+					one = &fencers[2];
+				}
+				else if (chons == "4") {
+					one = &fencers[3];
+				}
+				else if (chons == "5") {
+					one = &fencers[4];
+				}
+				else if (chons == "6") {
+					one = &fencers[5];
+				}
+				else {
+					continue;
+				}
+
+
+				std::cout << "Fencer 2:" << std::endl;
+				std::cin >> chins;
+
+				if (chins == "1") {
+					two = &fencers[0];
+					break;
+				}
+				else if (chins == "2") {
+					two = &fencers[0];
+					break;
+				}
+				else if (chins == "3") {
+					two = &fencers[0];
+					break;
+				}
+				else if (chins == "4") {
+					two = &fencers[0];
+					break;
+				}
+				else if (chins == "5") {
+					two = &fencers[0];
+					break;
+				}
+				else if (chins == "6") {
+					two = &fencers[0];
+					break;
+				}
+				else {
+					continue;
+				}
+
+
+
+			}
+
+
+			countRounds(one, two, &roundNorm);
+		}
+		else {
+			continue;
+		}
+	}
 	listFencers(fencers);
 
 	//countRounds(&stemble, &mssck, &roundNorm);
