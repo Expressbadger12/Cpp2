@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <random>
 
 
 //I was going to do a calculator but then I realized that all my functions were just taking doubles
@@ -23,7 +24,7 @@ public:
 };
 
 void makeBracket(fencer* fencers) {
-	
+	std::random_device r;
 }
 
 void listFencers(fencer* fencers) {
@@ -86,8 +87,8 @@ void displayBracket() {
 
 }
 
-void clearBracket() {
-
+void clearBracket(fencer* stemble, fencer* mssck, fencer* grrlo, fencer* bandin, fencer* clwon, fencer* zlack, fencer* fencers) {
+	fencers[6] = {*stemble, *mssck, *grrlo, *bandin, *clwon, *zlack};
 }
 
 int main()
