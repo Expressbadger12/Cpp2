@@ -36,7 +36,11 @@ public:
 int main()
 {
 
-    creature *creatures = new creature[5];
+    creature* creatures[5];
+
+    for (int i = 0; i <= 4; i++) {
+        creatures[i] = new creature();
+    }
 
     for (int i = 0; i < 5; i++) {
         string* name = new string;
@@ -60,7 +64,7 @@ int main()
         cin >> *fur;
         cout << endl;
 
-        creatures[i] = creature(name, age, numEyes, fur);
+        *creatures[i] = creature(name, age, numEyes, fur);
 
         delete name;
         delete age;
@@ -70,9 +74,8 @@ int main()
 
     for (int i = 0; i < 5; i++) {
         cout << creatures[i].name << endl;
-        delete &creatures[i];
     }
-
+    delete creatures;
 }
 
 /*

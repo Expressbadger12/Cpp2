@@ -1,2 +1,7 @@
 ﻿  allocatedeallocate.cpp
-  allocatedeallocate.vcxproj -> C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\allocatedeallocate\x64\Debug\allocatedeallocate.exe
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\allocatedeallocate\allocatedeallocate\allocatedeallocate.cpp(67,22): error C2440: '=': cannot convert from 'creature' to 'creature *'
+      C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\allocatedeallocate\allocatedeallocate\allocatedeallocate.cpp(67,22):
+      No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\allocatedeallocate\allocatedeallocate\allocatedeallocate.cpp(78,5): warning C4156: deletion of an array expression without using the array form of 'delete'; array form substituted
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\allocatedeallocate\allocatedeallocate\allocatedeallocate.cpp(78,5): warning C4154: deletion of an array expression; conversion to pointer supplied
