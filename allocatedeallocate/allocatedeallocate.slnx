@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="allocatedeallocate/allocatedeallocate.vcxproj" />
+  <Project Path="allocatedeallocate/allocatedeallocate.vcxproj" Id="3c6e352b-db4b-40df-b2a7-4a796b34c7a7" />
 </Solution>

@@ -15,6 +15,14 @@ public:
     int numEyes;
     bool fur;
 
+
+    creature() {
+        name = "";
+        age = 0;
+        numEyes = 0;
+        fur = false;
+    }
+
     creature(string* n, double* a, int* e, bool* f) {
         name = *n;
         age = *a;
@@ -27,14 +35,10 @@ public:
 
 int main()
 {
-    int howm;
 
-    cout << "How many creatures would you like to make? ";
-    cin >> howm;
+    creature *creatures = new creature[5];
 
-
-
-    for (int i = 0; i < howm; i++) {
+    for (int i = 0; i < 5; i++) {
         string* name = new string;
         double* age = new double;
         int* numEyes = new int;
@@ -56,18 +60,19 @@ int main()
         cin >> *fur;
         cout << endl;
 
-        creature(n, a, e, f) {
-            name = *n;
-            age = *a;
-            numEyes = *e;
-            fur = *f;
-        }
+        creatures[i] = creature(name, age, numEyes, fur);
 
         delete name;
         delete age;
         delete numEyes;
         delete fur;
     }
+
+    for (int i = 0; i < 5; i++) {
+        cout << creatures[i].name << endl;
+        delete &creatures[i];
+    }
+
 }
 
 /*
