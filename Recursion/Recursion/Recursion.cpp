@@ -28,9 +28,8 @@ int sum(int n) {
 	return n + sum(n - 1);
 }
 
-int main()
-{
-//	countdown(10);
+
+void factorialTest() {
 	int number;
 	cout << "Please enter a poisitive integer: ";
 	cin >> number;
@@ -41,8 +40,22 @@ int main()
 		int result = factorial(number);
 		cout << "Factorial of " << number << " is: " << result << endl;
 	}
+}
 
+int fibonachi(int n) {
+	if (n == 0) {
+		return 0;
+	}
+	if (n == 1) {
+		return 1;
+	}
+	return fibonachi(n - 1) + fibonachi(n - 2);
+}
 
-cout<<	sum(5);
+int main()
+{
+	for (int i = 0; i < 10; i++) {
+		cout << fibonachi(i) << " ";
+	}
 }
 
