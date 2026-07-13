@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+//class for my little clay creatures
 class creature {
 private:
 
@@ -32,16 +32,22 @@ public:
 };
 
 
+void printLine() {
+    cout << "===================================================" << endl;
+}
+
 
 int main()
 {
-
+    printLine();
+    cout << "Welcome to the clay creature generation factory!" << endl;
+    cout << "You will create 5 clay creatures, and each will have it's own little area of memory to live in" << endl;
+    printLine();
+    
+    //make an array of five clay creatures
     creature* creatures[5];
 
-    for (int i = 0; i <= 4; i++) {
-        creatures[i] = new creature();
-    }
-
+    //for each creature ask the user to provide data for it, allocate memory for each variable and for the creatures themselves
     for (int i = 0; i < 5; i++) {
         string* name = new string;
         double* age = new double;
@@ -60,11 +66,11 @@ int main()
         cin >> *numEyes;
         cout << endl;
 
-        cout << "Fur? (true or false): ";
+        cout << "Fur? (1 = yes, 0 = no): ";
         cin >> *fur;
         cout << endl;
 
-        *creatures[i] = creature(name, age, numEyes, fur);
+        creatures[i] = new creature(name, age, numEyes, fur);
 
         delete name;
         delete age;
@@ -73,9 +79,13 @@ int main()
     }
 
     for (int i = 0; i < 5; i++) {
-        cout << creatures[i].name << endl;
+        cout << creatures[i]->name << endl;
     }
-    delete creatures;
+    //deallocate the space given to each creatures
+    for (int i = 0; i < 5; i++)
+    {
+        delete creatures[i];
+    }
 }
 
 /*
