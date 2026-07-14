@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -17,10 +18,16 @@ public:
     void print() {
         cout << "This is a " << name << endl;
     }
+
+    ~item() {
+        cout << name << " was destroyed." << endl;
+    }
 };
 
 int main()
 {
+    cout << "Welcome to my simple game inventory management program!" << endl;
+
     unique_ptr<item> sword(new item("sword"));
 
     unique_ptr<item> potion(new item("potion"));
@@ -32,14 +39,16 @@ int main()
     cin >> choice;
 
     if (choice == "y") {
-
+        sword = make_unique<item>("bow");
     }
     else if (choice == "n") {
-
+        cout << "Nothing changed" << endl;
     }
     else {
         cout << "Bad response" << endl;
     }
+
+    cout << "Exiting Game" << endl;
 }
 
 /*

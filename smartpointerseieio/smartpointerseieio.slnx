@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="smartpointerseieio/smartpointerseieio.vcxproj" />
+  <Project Path="smartpointerseieio/smartpointerseieio.vcxproj" Id="138efa76-0505-4de1-971f-0407d72bc481" />
 </Solution>
