@@ -17,12 +17,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -33,8 +29,7 @@
               "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\include\\string",
               "ViewState": "AgIAAFAAAAAAAAAAAAAMwF8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-07-20T18:04:42.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-20T18:04:42.4Z"
             },
             {
               "$type": "Document",
@@ -44,7 +39,7 @@
               "RelativeDocumentMoniker": "recursionrecursion\\recursionrecursion.cpp",
               "ToolTip": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\recursionrecursion\\recursionrecursion\\recursionrecursion.cpp",
               "RelativeToolTip": "recursionrecursion\\recursionrecursion.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAcwCMAAACCAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAcwBUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-07-20T17:49:50.342Z",
               "EditorCaption": ""

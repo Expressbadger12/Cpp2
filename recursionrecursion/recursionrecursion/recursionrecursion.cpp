@@ -14,7 +14,13 @@ void makeMaze(int x, int y) {
 	}
 
 	for (int i = x; i > 0; i--) {
-		cout << "|";
+		int num = rand() % 2;
+		if (num == 0) {
+			cout << " ";
+		}
+		else {
+			cout << "#";
+		}
 	}
 	cout << endl;
 
@@ -34,6 +40,8 @@ int main()
 		
 		if (!cin) {
 			cout << "Please enter an integer greater than 0" << endl; //something's going wrong here. It doesn't wait for cin to hit again.
+			cin.clear(); // Clear the fail state
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			continue;
 		}
 
