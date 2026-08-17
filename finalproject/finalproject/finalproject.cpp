@@ -10,6 +10,8 @@
 
 using namespace std;
 
+bool playing = true;
+
 class product {
 public:
     string name;
@@ -17,23 +19,43 @@ public:
     int quantity;
     int shelfLife;
     string units;
-
-
 };
 
 class ship {
-
-    virtual void specalAbility() {
-
+protected:
+    string name;
+    float efficiency;
+    int capacity;
+public:
+    virtual void specialAbility() {
+        cout << "click click click click" << endl;
     }
 };
 
-class cargoShip : ship {
+class CargoShip : public ship {
+public:
+    CargoShip() {
+        name = "Cargo Ship";
+        efficiency = 0.8;
+        capacity = 300;
+    }
 
+    void specialAbility() override {
+        cout << "" << endl;
+    }
 };
 
-class explorer : ship {
+class Explorer : public ship {
+public:
+    Explorer() {
+        name = "Explorer";
+        efficiency = 1.1;
+        capacity = 200;
+    }
 
+    void specialAbility() override {
+        cout << "" << endl;
+    }
 };
 
 class company {
@@ -43,6 +65,25 @@ public:
     vector<product> supply;
     int caution;
     float trickiness;
+    string location;
+
+    company(string n, float w, string loc, float t, int c) {
+        name = n;
+        worth = w;
+        location = loc;
+        trickiness = t;
+        caution = c;
+    }
+};
+
+class Event {
+protected:
+    string name;
+    string description;
+public:
+    virtual void fallout() {
+        cout << "Nothing happens" << endl;
+    }
 };
 
 void printLine() {
@@ -97,7 +138,7 @@ void listMarket() {
     //This function will list the prices of goods on each planet.
 }
 
-void intro() {
+string intro() {
     printLine();
     cout << "Welcome, merchant! Are you ready to make your fortune? Travel the stars and trade goods to amass wealth!" << endl;
     cout << "What is the name of your company?" << endl;
@@ -106,25 +147,37 @@ void intro() {
     cout << endl;
 
     cout << "Welcome to the solar system, " << name << ". You're currently in orbit of Earth" << endl;
+
+    return name;
 }
 
 int main()
 {
-    intro();
+    string pname = intro();
 
-    cout << "What would you like to do? " << endl;
+    company player = company(pname, 4000, "Earth", 0, 0);
 
-    cout << "Enter '1' to list market" << endl;
 
-    cout << "Enter '2' to list inventory" << endl;
+    while (playing) {
+        string choice;
 
-    cout << "Enter '3' to list competitors" << endl;
+        cout << "What would you like to do? " << endl;
 
-    cout << "Enter '4' to list recent events" << endl;
+        cout << "Enter '1' to list market" << endl;
 
-    cout << "Enter '5' to travel" << endl;
+        cout << "Enter '2' to list inventory" << endl;
 
-    cout << "Enter '6' to advance time" << endl;
+        cout << "Enter '3' to list competitors" << endl;
 
-    cout << "Enter '7' to save" << endl;
+        cout << "Enter '4' to list recent events" << endl;
+
+        cout << "Enter '5' to travel" << endl;
+
+        cout << "Enter '6' to advance time" << endl;
+
+        cout << "Enter '7' to save" << endl;
+        
+        cin >> choice;
+    }
+   
 }
