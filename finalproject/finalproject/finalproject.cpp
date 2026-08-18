@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -19,6 +20,14 @@ public:
     int quantity;
     int shelfLife;
     string units;
+
+    product(string n, string u, float p) {
+        name = n;
+        units = u;
+        startingPrice = p;
+        quantity = 0; 
+        shelfLife = 0;
+}
 };
 
 class ship {
@@ -73,6 +82,7 @@ public:
         location = loc;
         trickiness = t;
         caution = c;
+        
     }
 };
 
@@ -86,16 +96,78 @@ public:
     }
 };
 
+class planet {
+public:
+    string name;
+    vector<product> market;
+};
+
 void printLine() {
     cout << "=============================================" << endl;
 }
 
-void checkInventory(vector<product>& storage) {
+void checkInventory(company& player) {
     printLine();
+
+    vector<product>& storage = player.supply;
     cout << "You currently have: " << endl;
     for (int i = 0; i < storage.size(); i++) {
-        cout << storage[i].quantity << " " << storage[i].units << " of " << storage[i].name << endl;
+        cout << "(" << i+1 << ") " << storage[i].quantity << " " << storage[i].units << " of " << storage[i].name << endl;
     }
+
+    cout << "You have $" << player.worth << endl;
+
+    string choice;
+    cout << "Would you like to sell something? (y/n)" << endl;
+    cin >> choice;
+    if (choice == "y") {
+        string prod;
+        int pnim;
+        cout << "Enter which product you would like to buy (1/2/3)" << endl;
+        cin >> prod;
+        try {
+            pnim = stoi(prod);
+        }
+        catch (const invalid_argument& e) {
+            cout << "Nice try" << endl;
+            pnim = 0;
+        }
+
+        if (pnim <= 0) {
+            return;
+        }
+        if (pnim >= 4) {
+            return;
+        }
+
+        string quan;
+        int quin;
+        cout << "How many " << player.supply[pnim - 1].units << " would you like to sell?" << endl;
+        cin >> quan;
+
+        try {
+            quin = stoi(quan);
+        }
+        catch (const invalid_argument& e) {
+            cout << "Nice try" << endl;
+            return;
+        }
+
+        if (quin > player.supply[pnim - 1].quantity) {
+            quin = player.supply[pnim - 1].quantity;
+        }
+        if (quin < 0) {
+            quin = 0;
+        }
+
+        player.supply[pnim - 1].quantity -= quin;
+        player.worth ++= player.supply[pnim - 1].startingPrice * quin;
+
+    }
+    else {
+        return;
+    }
+
 }
 
 void listEvents() {
@@ -134,11 +206,61 @@ void travel() {
 //This function will move the player from one planet to another. 
 }
 
-void listMarket() {
+void listMarket(const vector<product>& market, company& player) {
     //This function will list the prices of goods on each planet.
+    for (int i = 0; i < market.size(); i++) {
+        cout << "(" << i + 1 << ") " << market[i].name << " - $" << market[i].startingPrice << " per " << market[i].units << endl;
+    }
+
+    string choice;
+    cout << "Would you like to make a purchase? (y/n)" << endl;
+    cin >> choice;
+    if (choice == "y") {
+        string prod;
+        int pnim;
+        cout << "Enter which product you would like to buy (1/2/3)" << endl;
+        cin >> prod;
+        try {
+            pnim = stoi(prod);
+        }
+        catch (const invalid_argument& e) {
+            cout << "Nice try" << endl;
+            pnim = 0;
+        }
+
+        if (pnim <= 0) {
+            return;
+        }
+        if (pnim >= 4) {
+            return;
+        }
+        
+        cout << "How many " << market[pnim - 1].units << " would you like to purchase?" << endl;
+        string quan;
+        cin >> quan;
+        int quin;
+        try {
+            quin = stoi(quan);
+        }
+        catch (const invalid_argument& e) {
+            cout << "Nice try" << endl;
+            return;
+        }
+        if (quin < 0) {
+            return;
+        }
+        
+        player.supply[pnim - 1].quantity += quin;
+        player.worth -= (market[pnim - 1].startingPrice * quin);
+
+    }
+    else {
+        return;
+    }
+
 }
 
-string intro() {
+string intro(){
     printLine();
     cout << "Welcome, merchant! Are you ready to make your fortune? Travel the stars and trade goods to amass wealth!" << endl;
     cout << "What is the name of your company?" << endl;
@@ -151,15 +273,42 @@ string intro() {
     return name;
 }
 
+
+void checkBalance(company& player) {
+    if (player.worth <= 0) {
+        cout << "You've gone bankrupt! You lose!" << endl;
+        playing = false;
+    }
+}
+
 int main()
 {
     string pname = intro();
 
     company player = company(pname, 4000, "Earth", 0, 0);
 
+    product fuel = product("fuel", "gallons", 50);
+
+    product water = product("water", "gallons", 25);
+
+    product unobtainium = product("unobtainium", "pounds", 80);
+
+    vector<product> market;
+    market.push_back(fuel);
+    market.push_back(water);
+    market.push_back(unobtainium);
+        
+    player.supply.push_back(fuel);
+    player.supply.push_back(water);
+    player.supply.push_back(unobtainium);
+
 
     while (playing) {
         string choice;
+        checkBalance(player);
+        if (!playing) {
+            break;
+        }
 
         cout << "What would you like to do? " << endl;
 
@@ -178,6 +327,13 @@ int main()
         cout << "Enter '7' to save" << endl;
         
         cin >> choice;
+
+        if (choice == "1") {
+            listMarket(market, player);
+        }
+        else if (choice == "2") {
+            checkInventory(player);
+        }
     }
    
 }
