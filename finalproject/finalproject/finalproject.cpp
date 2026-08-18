@@ -8,10 +8,16 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
+#include <chrono>
+#include <thread>
+#include <fstream>
 
 using namespace std;
 
 bool playing = true;
+
+
 
 class product {
 public:
@@ -74,12 +80,10 @@ public:
     vector<product> supply;
     int caution;
     float trickiness;
-    string location;
 
-    company(string n, float w, string loc, float t, int c) {
+    company(string n, float w, float t, int c) {
         name = n;
         worth = w;
-        location = loc;
         trickiness = t;
         caution = c;
         
@@ -102,11 +106,13 @@ public:
     vector<product> market;
 };
 
+planet* currentPlanet;
+
 void printLine() {
     cout << "=============================================" << endl;
 }
 
-void checkInventory(company& player) {
+void checkInventory(const vector<product>& market, company& player) {
     printLine();
 
     vector<product>& storage = player.supply;
@@ -161,7 +167,7 @@ void checkInventory(company& player) {
         }
 
         player.supply[pnim - 1].quantity -= quin;
-        player.worth ++= player.supply[pnim - 1].startingPrice * quin;
+        player.worth += market[pnim - 1].startingPrice * quin;
 
     }
     else {
@@ -170,44 +176,128 @@ void checkInventory(company& player) {
 
 }
 
-void listEvents() {
-//this function will list out the recent events that happened for the player's reference (including recent trades, disasters, and whatnot)
-}
 
-void proposeTrade() {
-//Player will choose a other company and suggest a trade, if the company accepts, it will trigger the trade function. 
-}
-
-void advanceTime() {
-//This function will randomly select an event or trade to occur. This will effect the prices of items or the actions of other companies. This function will be called after the player takes an action or the player can call it manually
-}
-
-void passiveEffects() {
+void passiveEffects(planet* earth, planet* mars, planet* venus, bool skip) {
 //This function will regularly run on another thread, it will change the prices of items on certain planets and facilitate the expiration of certain goods while the player is navigating the menus
+   
+    for (int i = 0; i < earth->market.size(); i++) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distr(1, 100);
+        int rond = distr(gen);
+        float perct = rond / 100.0f;
+
+        earth->market[i].startingPrice *= perct;
+    }
+    for (int i = 0; i < mars->market.size(); i++) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distr(1, 100);
+        int rond = distr(gen);
+        float perct = rond / 100.0f;
+
+        mars->market[i].startingPrice *= perct;
+    }
+    for (int i = 0; i < venus->market.size(); i++) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> distr(1, 100);
+        int rond = distr(gen);
+        float perct = rond / 100.0f;
+
+        venus->market[i].startingPrice *= perct;
+    }
+
+    if (!skip) {
+        this_thread::sleep_for(chrono::seconds(20));
+    }
 }
 
-void trade() {
-//This function will either be called in the background by the advancetime function or it can be called manually by the player. It will faciliated the trade of goods and services between companies.
-}
 
-void disaster() {
-//This function has a chance to be called by the advance Time function. It will pick one of three unique events that can occur. This will cause some kind of change in the world.
+void advanceTime(planet* earth, planet* mars, planet* venus) {
+    //This function will randomly select an event or trade to occur. This will effect the prices of items or the actions of other companies. This function will be called after the player takes an action or the player can call it manually
+    passiveEffects(earth, mars, venus, true);
+    passiveEffects(earth, mars, venus, true);
+    passiveEffects(earth, mars, venus, true);
+    cout << "You have waited 3 days" << endl;
 }
 
 void save() {
 //this function will write the player's current wealth, name, and inventory to a txt file. 
 }
 
-void findRoute() {
-//This function will recursivly find the quickest route from the planet the player is currently in orbit of to a given destination planet. The function will then calculate how much fuel the trip will take.
-}
-
-void travel() {
+void travel(planet* current, planet* earth, planet* mars, planet* venus, company& player) {
 //This function will move the player from one planet to another. 
+
+    string choice;
+
+    cout << "You are on " << current->name << endl;
+    cout << "Would you like to travel to: " << endl;
+    cout << "(1) Earth" << endl;
+    cout << "(2) Mars" << endl;
+    cout << "(3) Venus" << endl;
+
+    cin >> choice;
+
+    string destination;
+
+    int dir;
+
+    try {
+        dir = stoi(choice);
+    }
+    catch (const invalid_argument& e) {
+        cout << "Nice try" << endl;
+        return;
+    }
+
+    switch (dir) {
+    case 1:
+        destination = "Earth";
+        break;
+    case 2:
+        destination = "Mars";
+        break;
+    case 3:
+        destination = "Venus";
+        break;
+    default:
+        cout << "Invalid selection. Warp jump aborted" << endl;
+        return;
+    }
+
+    if (destination == current->name) {
+        cout << "You're already here!" << endl;
+        return;
+    }
+
+    if (player.supply[0].quantity - 20 < 0) {
+        cout << "Not enough fuel" << endl;
+        return;
+    }
+
+    player.supply[0].quantity -= 20;
+    switch (dir) {
+    case 1:
+        currentPlanet = earth;
+        break;
+    case 2:
+        currentPlanet = mars;
+        break;
+    case 3:
+         currentPlanet = venus;
+         break;
+    default:
+        cout << "Invalid selection. Warp jump aborted" << endl;
+        return;
+    }
+
 }
 
 void listMarket(const vector<product>& market, company& player) {
     //This function will list the prices of goods on each planet.
+    cout << "You are in orbit of " << currentPlanet->name << "." << endl;
+
     for (int i = 0; i < market.size(); i++) {
         cout << "(" << i + 1 << ") " << market[i].name << " - $" << market[i].startingPrice << " per " << market[i].units << endl;
     }
@@ -260,6 +350,13 @@ void listMarket(const vector<product>& market, company& player) {
 
 }
 
+void passage(planet* earth, planet* mars, planet* venus) {
+    
+    while (playing) {
+        passiveEffects(earth, mars, venus, false);
+    }
+}
+
 string intro(){
     printLine();
     cout << "Welcome, merchant! Are you ready to make your fortune? Travel the stars and trade goods to amass wealth!" << endl;
@@ -281,11 +378,40 @@ void checkBalance(company& player) {
     }
 }
 
+void loadSave(company& player) {
+    cout << "Would you like to load the save? y/n" << endl;
+    string who;
+    cin >> who;
+    if (who == "y") {
+        ifstream inFile("saveData.txt");
+
+        if (!inFile) {
+            cout << "Could not load save. You're screwed" << endl;
+            return;
+        }
+
+        getline(inFile, player.name);
+        inFile >> player.worth;
+        inFile >> player.supply[0].quantity;
+        inFile >> player.supply[1].quantity;
+        inFile >> player.supply[2].quantity;
+
+        inFile.close();
+
+        cout << "Save loaded" << endl;
+    }
+    else {
+        cout << "Save not loaded" << endl;
+        return;
+    }
+
+}
+
 int main()
 {
     string pname = intro();
 
-    company player = company(pname, 4000, "Earth", 0, 0);
+    company player = company(pname, 4000, 0, 0);
 
     product fuel = product("fuel", "gallons", 50);
 
@@ -302,6 +428,29 @@ int main()
     player.supply.push_back(water);
     player.supply.push_back(unobtainium);
 
+    planet earth;
+    earth.name = "Earth";
+    earth.market.push_back(product("Fuel", "gallons", 50));
+    earth.market.push_back(product("Water", "gallons", 25));
+    earth.market.push_back(product("Unobtainium", "pounds", 80));
+
+    planet mars;
+    mars.name = "Mars";
+    mars.market.push_back(product("Fuel", "gallons", 20));
+    mars.market.push_back(product("Water", "gallons", 30));
+    mars.market.push_back(product("Unobtainium", "pounds", 100));
+
+    planet venus;
+    venus.name = "Venus";
+    venus.market.push_back(product("Fuel", "gallons", 20));
+    venus.market.push_back(product("Water", "gallons", 40));
+    venus.market.push_back(product("Unobtainium", "pounds", 100));
+
+    loadSave(player);
+
+    currentPlanet = &earth;
+
+    thread t1(passage, &earth, &mars, &venus);
 
     while (playing) {
         string choice;
@@ -316,24 +465,42 @@ int main()
 
         cout << "Enter '2' to list inventory" << endl;
 
-        cout << "Enter '3' to list competitors" << endl;
+        cout << "Enter '3' to travel" << endl;
 
-        cout << "Enter '4' to list recent events" << endl;
+        cout << "Enter '4' to advance time" << endl;
 
-        cout << "Enter '5' to travel" << endl;
-
-        cout << "Enter '6' to advance time" << endl;
-
-        cout << "Enter '7' to save" << endl;
+        cout << "Enter '5' to save" << endl;
         
         cin >> choice;
 
         if (choice == "1") {
-            listMarket(market, player);
+            listMarket(currentPlanet->market, player);
         }
         else if (choice == "2") {
-            checkInventory(player);
+            checkInventory(currentPlanet->market, player);
+        }
+        else if (choice == "3") {
+            travel(currentPlanet, &earth, &mars, &venus, player);
+        }
+        else if (choice == "4") {
+            advanceTime(&earth, &mars, &venus);
+        }
+        else if (choice == "5") {
+            ofstream outFile("saveData.txt");
+
+            if (!outFile.is_open()) {
+                cout << "could not open file. You're screwed" << endl;
+                continue;
+            }
+            outFile << player.name << endl;
+            outFile << player.worth << endl;
+            outFile << player.supply[0].quantity << endl;
+            outFile << player.supply[1].quantity << endl;
+            outFile << player.supply[2].quantity << endl;
+
+            cout << "Saved!" << endl;
         }
     }
+    t1.join();
    
 }

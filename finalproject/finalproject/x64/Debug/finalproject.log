@@ -1,7 +1,9 @@
 ﻿  finalproject.cpp
-C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(48,22): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(61,22): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(125,40): warning C4101: 'e': unreferenced local variable
-C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(198,40): warning C4101: 'e': unreferenced local variable
-C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(217,40): warning C4101: 'e': unreferenced local variable
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(54,22): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(67,22): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(137,40): warning C4101: 'e': unreferenced local variable
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(157,40): warning C4101: 'e': unreferenced local variable
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(249,36): warning C4101: 'e': unreferenced local variable
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(316,40): warning C4101: 'e': unreferenced local variable
+C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\finalproject\finalproject.cpp(335,40): warning C4101: 'e': unreferenced local variable
   finalproject.vcxproj -> C:\Users\fboon\OneDrive\Documents\GitHub\Cpp2\finalproject\x64\Debug\finalproject.exe

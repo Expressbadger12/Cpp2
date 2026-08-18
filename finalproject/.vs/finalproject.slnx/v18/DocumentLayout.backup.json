@@ -14,21 +14,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "finalproject.cpp",
               "DocumentMoniker": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\finalproject\\finalproject\\finalproject.cpp",
               "RelativeDocumentMoniker": "finalproject\\finalproject.cpp",
-              "ToolTip": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\finalproject\\finalproject\\finalproject.cpp*",
-              "RelativeToolTip": "finalproject\\finalproject.cpp*",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAuwIgAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\fboon\\OneDrive\\Documents\\GitHub\\Cpp2\\finalproject\\finalproject\\finalproject.cpp",
+              "RelativeToolTip": "finalproject\\finalproject.cpp",
+              "ViewState": "AgIAAM4BAAAAAAAAAAAmwO0BAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-07-28T02:17:52.498Z",
               "EditorCaption": ""
